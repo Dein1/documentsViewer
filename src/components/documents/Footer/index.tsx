@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, Divider} from 'react-native-paper';
-import {COLORS} from '../../../utils/constants/colors';
+
+import {COLORS} from '@app/utils/constants/colors';
 
 interface FooterProps {
   buttonText: string;

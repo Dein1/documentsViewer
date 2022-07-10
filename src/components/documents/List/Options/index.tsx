@@ -1,21 +1,24 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Toggler} from './Toggler';
+
+import {Toggler} from '@app/components/documents/List/Options/Toggler';
+
+export type ViewMode = 'list' | 'grid';
 
 interface OptionsProps {
-  onChangeView: () => void;
+  onChangeViewMode: (newMode: ViewMode) => void;
   onChageSorting: () => void;
-  viewValue: 'list' | 'grid';
+  viewMode: ViewMode;
   sortingValue: null;
 }
 
 const Options: React.FC<OptionsProps> = ({
-  onChangeView,
-  viewValue = 'list',
+  onChangeViewMode,
+  viewMode,
 }: OptionsProps) => {
   return (
     <View style={styles.container}>
-      <Toggler value={viewValue} onChange={onChangeView} />
+      <Toggler value={viewMode} onChange={onChangeViewMode} />
     </View>
   );
 };
@@ -24,8 +27,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginTop: 10,
     marginHorizontal: 10,
+    marginVertical: 16,
   },
 });
 

@@ -2,8 +2,8 @@ import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {Provider as PaperProvider} from 'react-native-paper';
 
-import {DocumentsScreen} from './components/screens/Documents';
-import {COLORS} from './utils/constants/colors';
+import {DocumentsScreen} from '@app/components/screens/Documents';
+import {COLORS} from '@app/utils/constants/colors';
 
 const App = () => {
   return (

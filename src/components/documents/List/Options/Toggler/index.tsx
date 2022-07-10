@@ -2,20 +2,22 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ToggleButton} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {COLORS} from '../../../../utils/constants/colors';
+
+import {ViewMode} from '@app/components/documents/List/Options';
+import {COLORS} from '@app/utils/constants/colors';
 
 interface TogglerProps {
-  onChange: () => void;
-  value: 'list' | 'grid';
+  onChange: (newMode: ViewMode) => void;
+  value: ViewMode;
 }
 
 const Toggler: React.FC<TogglerProps> = ({onChange, value}: TogglerProps) => {
-  const getButtonColor = (buttonName: 'list' | 'grid') =>
+  const getButtonColor = (buttonName: ViewMode) =>
     value === buttonName ? COLORS.grey : COLORS.blue;
 
   return (
     <View>
-      <ToggleButton.Row onValueChange={onChange} value={value}>
+      <ToggleButton.Row onValueChange={onChange as any} value={value}>
         <ToggleButton
           icon={() => (
             <Icon
@@ -26,7 +28,6 @@ const Toggler: React.FC<TogglerProps> = ({onChange, value}: TogglerProps) => {
           )}
           value="list"
           size={15}
-          status={'checked'}
           style={[styles.button, value !== 'list' && styles.unchecked]}
         />
         <ToggleButton

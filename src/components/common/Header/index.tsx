@@ -2,12 +2,12 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Appbar, Badge} from 'react-native-paper';
 
-import {COLORS} from '../../../utils/constants/colors';
+import {COLORS} from '@app/utils/constants/colors';
 
-interface HeaderProps {
+type HeaderProps = {
   title: string;
   badgeCount?: number;
-}
+};
 
 const Header: React.FC<HeaderProps> = ({title, badgeCount}: HeaderProps) => {
   return (
