@@ -26,6 +26,7 @@ const List: React.FC<ListProps> = ({
         contributors={item.Contributors}
         attachments={item.Attachments}
         viewMode={viewMode}
+        key={`${item.ID} + ${item.Title}`}
       />
     );
   };
@@ -60,7 +61,7 @@ const List: React.FC<ListProps> = ({
 
 const styles = StyleSheet.create({
   listContainer: {
-    paddingBottom: 50,
+    paddingBottom: 80,
     marginHorizontal: 16,
   },
   gridElementContainer: {

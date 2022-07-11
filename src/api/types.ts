@@ -1,11 +1,11 @@
 export type IDocument = {
   Title: string;
   Version: string;
-  Attachments: string[];
-  Contributors: IContributor[];
+  Attachments?: string[];
+  Contributors?: IContributor[];
   ID: string;
   CreatedAt: Date;
-  UpdatedAt: Date;
+  UpdatedAt?: Date;
 };
 
 export type IContributor = {

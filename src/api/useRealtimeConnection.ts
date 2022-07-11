@@ -1,9 +1,11 @@
 import {useEffect} from 'react';
-import {useQueryClient} from 'react-query';
 import Toast from 'react-native-simple-toast';
 
+import {useAddToCache} from '@app/api/useAddToCache';
+
 export const useRealtimeConnection = () => {
-  const queryClient = useQueryClient();
+  const {addItem} = useAddToCache();
+
   useEffect(() => {
     const websocket = new WebSocket('ws://localhost:8080/notifications');
 
@@ -20,17 +22,17 @@ export const useRealtimeConnection = () => {
           },
         ],
         Title: data.DocumentTitle,
+        Version: '1',
       };
 
       Toast.show(`New document added: ${data.DocumentTitle}`, Toast.SHORT);
 
-      queryClient.setQueryData('documents', old =>
-        old ? [...(old as any), newItem] : [newItem],
-      );
+      addItem(newItem);
     };
 
     return () => {
       websocket.close();
     };
-  }, [queryClient]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };
