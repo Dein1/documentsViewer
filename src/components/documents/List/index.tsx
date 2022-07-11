@@ -1,33 +1,43 @@
 import React, {useState} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet} from 'react-native';
 
 import {Options} from '@app/components/documents/List/Options';
 import {Card} from '@app/components/documents/List/Card';
-
-export interface ICard {
-  title: string;
-  version: string;
-  attachments: string[];
-  contributors: {id: string; name: string}[];
-  id: string;
-}
+import {IDocument} from '@app/api/types';
 
 interface ListProps {
-  cards: ICard[];
+  cards?: IDocument[];
+  onRefresh: () => void;
+  isRefreshing: boolean;
 }
 
-const List: React.FC<ListProps> = ({cards}: ListProps) => {
+const List: React.FC<ListProps> = ({
+  cards,
+  onRefresh,
+  isRefreshing,
+}: ListProps) => {
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
-  const renderItem = ({item}: {item: ICard}) => {
-    return <Card {...item} viewMode={viewMode} />;
+  const renderItem = ({item}: {item: IDocument}) => {
+    return (
+      <Card
+        title={item.Title}
+        version={item.Version}
+        contributors={item.Contributors}
+        attachments={item.Attachments}
+        viewMode={viewMode}
+      />
+    );
   };
 
   return (
     <FlatList
       renderItem={renderItem}
+      refreshControl={
+        <RefreshControl onRefresh={onRefresh} refreshing={isRefreshing} />
+      }
       data={cards}
-      keyExtractor={item => item.id}
+      keyExtractor={item => item.ID}
       key={viewMode}
       contentContainerStyle={styles.listContainer}
       columnWrapperStyle={viewMode === 'grid' && styles.gridElementContainer}

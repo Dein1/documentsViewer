@@ -3,11 +3,15 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import {Card as Container, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {ICard} from '@app/components/documents/List';
 import {COLORS} from '@app/utils/constants/colors';
 import {ViewMode} from '@app/components/documents/List/Options';
+import {IContributor} from '@app/api/types';
 
-type CardProps = ICard & {
+type CardProps = {
+  title: string;
+  version: string;
+  contributors?: IContributor[];
+  attachments?: string[];
   viewMode: ViewMode;
 };
 
@@ -28,7 +32,7 @@ const Card: React.FC<CardProps> = ({
         <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
           {title}
         </Text>
-        <Text style={styles.version}>{`Version ${version}`}</Text>
+        {version && <Text style={styles.version}>{`Version ${version}`}</Text>}
       </View>
       {isFullCard && (
         <View style={styles.additionalsContainer}>
@@ -41,9 +45,9 @@ const Card: React.FC<CardProps> = ({
               />
               <Text style={styles.additionalsHeader}>{'Contibutors'}</Text>
             </View>
-            {contributors.map(contributor => (
-              <Text style={styles.additionalElement} key={contributor.id}>
-                {contributor.name}
+            {contributors?.map(contributor => (
+              <Text style={styles.additionalElement} key={contributor.ID}>
+                {contributor.Name}
               </Text>
             ))}
           </View>
@@ -56,7 +60,7 @@ const Card: React.FC<CardProps> = ({
               />
               <Text style={styles.additionalsHeader}>{'Attachments'}</Text>
             </View>
-            {attachments.map((attachment, index) => (
+            {attachments?.map((attachment, index) => (
               <Text style={styles.additionalElement} key={index}>
                 {attachment}
               </Text>
