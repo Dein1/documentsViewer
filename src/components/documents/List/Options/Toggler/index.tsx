@@ -24,6 +24,7 @@ const Toggler: React.FC<TogglerProps> = ({onChange, value}: TogglerProps) => {
               name="format-list-bulleted-square"
               color={getButtonColor('list')}
               size={15}
+              testID={'list-view'}
             />
           )}
           value="list"
@@ -32,7 +33,12 @@ const Toggler: React.FC<TogglerProps> = ({onChange, value}: TogglerProps) => {
         />
         <ToggleButton
           icon={() => (
-            <Icon name="grid-large" color={getButtonColor('grid')} size={15} />
+            <Icon
+              name="grid-large"
+              color={getButtonColor('grid')}
+              size={15}
+              testID={'grid-view'}
+            />
           )}
           value="grid"
           size={15}

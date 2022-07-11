@@ -4,8 +4,8 @@ export type IDocument = {
   Attachments?: string[];
   Contributors?: IContributor[];
   ID: string;
-  CreatedAt: Date;
-  UpdatedAt?: Date;
+  CreatedAt: string;
+  UpdatedAt?: string;
 };
 
 export type IContributor = {
